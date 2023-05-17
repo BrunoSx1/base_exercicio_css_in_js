@@ -1,24 +1,23 @@
-import { useState } from 'react'
-import FormVagas from '../../components/FormVagas'
+import { useState } from 'react';
+import FormVagas from '../../components/FormVagas';
+import Vaga from '../../components/Vaga';
 
-import Vaga from '../../components/Vaga'
+import { VagasContainer } from './ListaVagas.styles';
 
-import styles from './ListaVagas.module.css'
+type VagaType = {
+  id: string;
+  titulo: string;
+  localizacao: string;
+  nivel: string;
+  modalidade: string;
+  salarioMin: number;
+  salarioMax: number;
+  requisitos: string[];
+};
 
-type Vaga = {
-  id: string
-  titulo: string
-  localizacao: string
-  nivel: string
-  modalidade: string
-  salarioMin: number
-  salarioMax: number
-  requisitos: string[]
-}
-
-const vagas = [
+const vagas: VagaType[] = [
   {
-    id: 1,
+    id: '1',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'remoto',
     nivel: 'junior',
@@ -28,7 +27,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 2,
+    id: '2',
     titulo: 'Desenvolvedor NodeJS',
     localizacao: 'remoto',
     nivel: 'pleno',
@@ -38,7 +37,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 3,
+    id: '3',
     titulo: 'Desenvolvedor fullstack',
     localizacao: 'remoto',
     nivel: 'pleno',
@@ -48,7 +47,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 4,
+    id: '4',
     titulo: 'Designer de interfaces',
     localizacao: 'remoto',
     nivel: 'junior',
@@ -58,7 +57,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 5,
+    id: '5',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'remoto',
     nivel: 'senior',
@@ -68,7 +67,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 6,
+    id: '6',
     titulo: 'Desenvolvedor front-end para projeto internacional',
     localizacao: 'remoto',
     nivel: 'senior',
@@ -78,7 +77,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 7,
+    id: '7',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'São Paulo/SP',
     nivel: 'junior',
@@ -90,16 +89,16 @@ const vagas = [
 ]
 
 const ListaVagas = () => {
-  const [filtro, setFiltro] = useState<string>('')
+  const [filtro, setFiltro] = useState<string>('');
 
   const vagasFiltradas = vagas.filter(
     (x) => x.titulo.toLocaleLowerCase().search(filtro) >= 0
-  )
+  );
 
   return (
     <div>
       <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <ul className={styles.vagas}>
+      <VagasContainer>
         {vagasFiltradas.map((vag) => (
           <Vaga
             key={vag.id}
@@ -112,9 +111,9 @@ const ListaVagas = () => {
             requisitos={vag.requisitos}
           />
         ))}
-      </ul>
+      </VagasContainer>
     </div>
-  )
-}
+  );
+};
 
-export default ListaVagas
+export default ListaVagas;
